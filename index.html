@@ -166,11 +166,11 @@
 <body>
 
   <!-- ===== Header ===== -->
-  <header>
-    <div class="container nav">
-      <div class="brand">
-        <img src="assets/logo.jpg" alt="노무매치 로고" />
-        <span>노무매치<span style="color:var(--muted);font-weight:600;font-size:.8rem;"> NomuMatch</span></span>
+  <header id="siteHeader">
+    <div class="container nav" id="navBar">
+      <div class="brand" id="brand">
+        <img src="assets/logo.jpg" alt="노무매치 로고" id="logoImg" />
+        <span id="brandName">노무매치<span style="color:var(--muted);font-weight:600;font-size:.8rem;"> NomuMatch</span></span>
       </div>
       <a href="#start" class="nav-cta" id="btnStart" target="_blank" rel="noopener">시작하기</a>
     </div>
@@ -178,19 +178,19 @@
 
   <!-- ===== Hero ===== -->
   <section class="hero" id="start">
-    <div class="container hero-grid">
-      <div>
-        <h1>복잡한 노동 문제,<br/><span class="accent">검증된 노무사</span>와<br/>딱 맞게 매칭.</h1>
-        <div class="badges">
-          <span class="badge">✅ 공인노무사 인증</span>
-          <span class="badge">⚡ 평균 3분 내 매칭</span>
-          <span class="badge">🔒 상담 내용 비밀 보장</span>
+    <div class="container hero-grid" id="heroGrid">
+      <div id="heroCopy">
+        <h1 id="heroTitle">복잡한 노동 문제,<br/><span class="accent">검증된 노무사</span>와<br/>딱 맞게 매칭.</h1>
+        <div class="badges" id="heroBadges">
+          <span class="badge" id="badgeCertified">✅ 공인노무사 인증</span>
+          <span class="badge" id="badgeSpeed">⚡ 평균 3분 내 매칭</span>
+          <span class="badge" id="badgePrivacy">🔒 상담 내용 비밀 보장</span>
         </div>
 
         <!-- Device-aware CTA -->
-        <div class="cta-card">
+        <div class="cta-card" id="ctaCard">
           <div class="device-line" id="deviceLine">접속 환경을 확인하는 중…</div>
-          <div class="cta-buttons">
+          <div class="cta-buttons" id="heroCtaButtons">
             <!-- Mobile / app -->
             <a class="btn btn-primary is-hidden" id="btnApp" href="#" target="_blank" rel="noopener">
               📱 <span class="btn-row">앱으로 시작하기<span class="sub" id="appSub">App Store / Google Play</span></span>
@@ -207,46 +207,46 @@
         </div>
       </div>
 
-      <div>
-        <img class="hero-img" src="assets/hero.jpg" alt="공인노무사 전문가" />
+      <div id="heroImgWrap">
+        <img class="hero-img" src="assets/hero.jpg" alt="공인노무사 전문가" id="heroImg" />
       </div>
     </div>
   </section>
 
   <!-- ===== What ===== -->
-  <section class="block">
+  <section class="block" id="whatSection">
     <div class="container">
-      <div class="section-head">
-        <h2>이런 고민, 노무매치가 도와드려요</h2>
-        <p>혼자 끙끙 앓지 마세요. 분야별 전문 노무사가 함께합니다.</p>
+      <div class="section-head" id="whatHead">
+        <h2 id="whatTitle">이런 고민, 노무매치가 도와드려요</h2>
+        <p id="whatSubtitle">혼자 끙끙 앓지 마세요. 분야별 전문 노무사가 함께합니다.</p>
       </div>
-      <div class="cards">
-        <div class="card">
+      <div class="cards" id="whatCards">
+        <div class="card" id="cardUnfairDismissal">
           <div class="ico">⚖️</div>
           <h3>부당해고 · 징계</h3>
           <p>해고예고, 부당해고 구제신청, 징계 대응까지 노동위원회 절차를 함께 준비합니다.</p>
         </div>
-        <div class="card">
+        <div class="card" id="cardUnpaidWage">
           <div class="ico">💰</div>
           <h3>임금체불 · 퇴직금</h3>
           <p>못 받은 임금·수당·퇴직금, 진정·고소부터 체불액 산정까지 꼼꼼하게.</p>
         </div>
-        <div class="card">
+        <div class="card" id="cardInjury">
           <div class="ico">🏥</div>
           <h3>산업재해 보상</h3>
           <p>산재 인정, 요양·휴업급여 신청과 불승인 이의신청을 전문가가 대리합니다.</p>
         </div>
-        <div class="card">
+        <div class="card" id="cardHarassment">
           <div class="ico">🛡️</div>
           <h3>직장 내 괴롭힘 · 성희롱</h3>
           <p>사건 정리, 신고서 작성, 회사 대응 자문으로 안전한 해결을 돕습니다.</p>
         </div>
-        <div class="card">
+        <div class="card" id="cardInsurance">
           <div class="ico">📋</div>
           <h3>4대보험 · 인사노무</h3>
           <p>사업주를 위한 취업규칙, 근로계약서, 4대보험 신고 등 노무관리 전반.</p>
         </div>
-        <div class="card">
+        <div class="card" id="cardDispute">
           <div class="ico">🤝</div>
           <h3>노사 분쟁 조정</h3>
           <p>노사 간 갈등, 단체교섭, 합의 중재까지 균형 잡힌 시각으로 중재합니다.</p>
@@ -256,29 +256,29 @@
   </section>
 
   <!-- ===== How ===== -->
-  <section class="block" style="background:#eef2fa;">
+  <section class="block" style="background:#eef2fa;" id="howSection">
     <div class="container">
-      <div class="section-head">
-        <h2>이용 방법 — 4단계면 충분해요</h2>
-        <p>가입부터 매칭까지, 복잡한 절차 없이 빠르게.</p>
+      <div class="section-head" id="howHead">
+        <h2 id="howTitle">이용 방법 — 4단계면 충분해요</h2>
+        <p id="howSubtitle">가입부터 매칭까지, 복잡한 절차 없이 빠르게.</p>
       </div>
-      <div class="steps">
-        <div class="step">
+      <div class="steps" id="howSteps">
+        <div class="step" id="step1">
           <div class="num">1</div>
           <h4>사건 입력</h4>
           <p>고민 유형과 지역, 간단한 상황을 적어주세요.</p>
         </div>
-        <div class="step">
+        <div class="step" id="step2">
           <div class="num">2</div>
           <h4>노무사 추천</h4>
           <p>전문 분야·후기 기반으로 적합한 노무사를 추천.</p>
         </div>
-        <div class="step">
+        <div class="step" id="step3">
           <div class="num">3</div>
           <h4>비교 · 선택</h4>
           <p>경력, 비용, 후기를 비교하고 직접 선택하세요.</p>
         </div>
-        <div class="step">
+        <div class="step" id="step4">
           <div class="num">4</div>
           <h4>상담 시작</h4>
           <p>채팅·전화로 바로 상담하고 사건을 맡기세요.</p>
@@ -288,20 +288,20 @@
   </section>
 
   <!-- ===== Stats ===== -->
-  <section class="block">
-    <div class="container stats">
-      <div class="stat"><div class="n">1,200+</div><div class="l">누적 매칭 건수</div></div>
-      <div class="stat"><div class="n">3분</div><div class="l">평균 매칭 소요 시간</div></div>
-      <div class="stat"><div class="n">4.8 / 5</div><div class="l">이용자 만족도</div></div>
+  <section class="block" id="statsSection">
+    <div class="container stats" id="statsRow">
+      <div class="stat" id="statMatches"><div class="n">1,200+</div><div class="l">누적 매칭 건수</div></div>
+      <div class="stat" id="statSpeed"><div class="n">3분</div><div class="l">평균 매칭 소요 시간</div></div>
+      <div class="stat" id="statRating"><div class="n">4.8 / 5</div><div class="l">이용자 만족도</div></div>
     </div>
   </section>
 
   <!-- ===== Final CTA ===== -->
-  <section class="final">
+  <section class="final" id="finalSection">
     <div class="container">
-      <h2>지금 바로 노무사와 연결되세요</h2>
+      <h2 id="finalTitle">지금 바로 노무사와 연결되세요</h2>
       <p id="finalSub">접속하신 기기에 맞는 가장 빠른 방법을 안내해 드립니다.</p>
-      <div class="cta-buttons">
+      <div class="cta-buttons" id="finalCtaButtons">
         <a class="btn btn-primary is-hidden" id="btnApp2" href="#" target="_blank" rel="noopener">📱 앱으로 시작하기</a>
         <a class="btn btn-primary is-hidden" id="btnWeb2" href="#" target="_blank" rel="noopener">💻 웹으로 시작하기</a>
       </div>
@@ -309,18 +309,18 @@
   </section>
 
   <!-- ===== Footer ===== -->
-  <footer>
+  <footer id="siteFooter">
     <div class="container">
-      <div>
-        <div style="color:#fff;font-weight:700;margin-bottom:6px;">노무매치 (NomuMatch)</div>
-        <div>고객센터 · 노무사 매칭 플랫폼</div>
-        <div class="disclaimer">
+      <div id="footerInfo">
+        <div id="footerBrand" style="color:#fff;font-weight:700;margin-bottom:6px;">노무매치 (NomuMatch)</div>
+        <div id="footerTagline">고객센터 · 노무사 매칭 플랫폼</div>
+        <div class="disclaimer" id="footerDisclaimer">
           ※ 노무매치는 이용자와 공인노무사를 연결하는 중개 플랫폼이며, 법률·노무 자문의 주체는 매칭된 노무사입니다.
         </div>
       </div>
-      <div>
-        <div><a href="mailto:nomumatch@gmail.com">nomumatch@gmail.com</a></div>
-        <div style="margin-top:6px;"><a href="#start">서비스 시작하기</a></div>
+      <div id="footerLinks">
+        <div><a href="mailto:nomumatch@gmail.com" id="footerEmail">nomumatch@gmail.com</a></div>
+        <div style="margin-top:6px;"><a href="#start" id="btnFooterStart" target="_blank" rel="noopener">서비스 시작하기</a></div>
       </div>
     </div>
   </footer>
@@ -353,6 +353,7 @@
       var btnWeb2 = document.getElementById('btnWeb2');
       var finalSub= document.getElementById('finalSub');
       var btnStart= document.getElementById('btnStart');
+      var btnFooterStart = document.getElementById('btnFooterStart');
 
       function show(el){ el.classList.remove('is-hidden'); }
       function hide(el){ el.classList.add('is-hidden'); }
@@ -368,8 +369,9 @@
         btnApp.href = appUrl;  show(btnApp);
         btnApp2.href = appUrl;  show(btnApp2);
 
-        // 헤더 '시작하기' → 모바일이면 해당 OS 앱 스토어로
+        // 헤더 '시작하기' + 푸터 '서비스 시작하기' → 모바일이면 해당 OS 앱 스토어로
         btnStart.href = appUrl;
+        btnFooterStart.href = appUrl;
 
         altLabel.textContent = '💻 웹으로 시작하기';
         btnAlt.href = LINKS.web;
@@ -382,8 +384,9 @@
         btnWeb.href = LINKS.web;  show(btnWeb);
         btnWeb2.href = LINKS.web;  show(btnWeb2);
 
-        // 헤더 '시작하기' → PC면 웹으로 시작하기와 동일
+        // 헤더 '시작하기' + 푸터 '서비스 시작하기' → PC면 웹으로 시작하기와 동일
         btnStart.href = LINKS.web;
+        btnFooterStart.href = LINKS.web;
 
         altLabel.textContent = '📱 모바일 앱 안내 보기';
         btnAlt.href = LINKS.android; // 안내용 — 스토어 페이지
