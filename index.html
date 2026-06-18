@@ -172,7 +172,7 @@
         <img src="assets/logo.jpg" alt="노무매치 로고" />
         <span>노무매치<span style="color:var(--muted);font-weight:600;font-size:.8rem;"> NomuMatch</span></span>
       </div>
-      <a href="#start" class="nav-cta">시작하기</a>
+      <a href="#start" class="nav-cta" id="btnStart" target="_blank" rel="noopener">시작하기</a>
     </div>
   </header>
 
@@ -337,7 +337,7 @@
     var LINKS = {
       ios:     "https://apps.apple.com/app/idYOURAPPID",        // App Store
       android: "https://play.google.com/store/apps/details?id=com.nomumatch", // Google Play
-      web:     "https://app.nomumatch.com"                       // 웹 앱
+      web:     "http://dev.nomumatch.com:8888/main"              // 웹 앱
     };
 
     (function () {
@@ -357,6 +357,7 @@
       var btnApp2 = document.getElementById('btnApp2');
       var btnWeb2 = document.getElementById('btnWeb2');
       var finalSub= document.getElementById('finalSub');
+      var btnStart= document.getElementById('btnStart');
 
       function show(el){ el.classList.remove('is-hidden'); }
       function hide(el){ el.classList.add('is-hidden'); }
@@ -372,6 +373,9 @@
         btnApp.href = appUrl;  show(btnApp);
         btnApp2.href = appUrl;  show(btnApp2);
 
+        // 헤더 '시작하기' → 모바일이면 해당 OS 앱 스토어로
+        btnStart.href = appUrl;
+
         altLabel.textContent = '💻 웹으로 시작하기';
         btnAlt.href = LINKS.web;
 
@@ -382,6 +386,9 @@
 
         btnWeb.href = LINKS.web;  show(btnWeb);
         btnWeb2.href = LINKS.web;  show(btnWeb2);
+
+        // 헤더 '시작하기' → PC면 웹으로 시작하기와 동일
+        btnStart.href = LINKS.web;
 
         altLabel.textContent = '📱 모바일 앱 안내 보기';
         btnAlt.href = LINKS.android; // 안내용 — 스토어 페이지
