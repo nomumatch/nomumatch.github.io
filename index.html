@@ -56,13 +56,31 @@
       padding: 9px 18px; border-radius: 999px; font-weight: 700; font-size: .92rem;
       cursor: pointer; text-decoration: none;
     }
-    .lang-select {
-      appearance: none; -webkit-appearance: none;
-      background: #fff url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%235b6678' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 10px center;
-      border: 1px solid #d7deeb; border-radius: 999px;
-      padding: 7px 28px 7px 14px; font-size: .88rem; font-weight: 600;
-      color: var(--navy); cursor: pointer;
+
+    /* ---------- Language menu (globe) ---------- */
+    .lang-menu { position: relative; }
+    .lang-btn {
+      display: flex; align-items: center; gap: 6px;
+      background: #fff; border: 1px solid #d7deeb; border-radius: 999px;
+      padding: 7px 14px; font-size: .88rem; font-weight: 700;
+      color: var(--navy); cursor: pointer; font-family: inherit;
     }
+    .lang-btn .lang-caret { font-size: .6rem; color: var(--muted); }
+    .lang-dropdown {
+      position: absolute; top: calc(100% + 8px); right: 0; z-index: 60;
+      min-width: 168px; list-style: none;
+      background: #fff; border: 1px solid #e6eaf2; border-radius: 14px;
+      box-shadow: var(--shadow); padding: 6px; margin: 0;
+    }
+    .lang-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 12px; border-radius: 9px; cursor: pointer;
+      font-size: .9rem; color: var(--text); white-space: nowrap;
+    }
+    .lang-item:hover { background: #f0f4fb; }
+    .lang-item.active { background: #e9f0fd; color: var(--blue); font-weight: 700; }
+    .lang-item .code { font-weight: 800; color: var(--navy); width: 28px; font-size: .82rem; }
+    .lang-item.active .code { color: var(--blue); }
 
     /* ---------- Hero ---------- */
     .hero {
@@ -181,10 +199,19 @@
         <span id="brandName">노무매치<span style="color:var(--muted);font-weight:600;font-size:.8rem;"> NomuMatch</span></span>
       </div>
       <div class="nav-right" id="navRight">
-        <select class="lang-select" id="langSelect" aria-label="Language">
-          <option value="ko">한국어</option>
-          <option value="en">English</option>
-        </select>
+        <div class="lang-menu" id="langMenu">
+          <button class="lang-btn" id="langBtn" type="button" aria-haspopup="listbox" aria-expanded="false">
+            🌐 <span id="langCode">KR</span> <span class="lang-caret" id="langCaret">▾</span>
+          </button>
+          <ul class="lang-dropdown is-hidden" id="langDropdown" role="listbox">
+            <li class="lang-item" id="langItemKo" role="option" data-lang="ko"><span class="code">KR</span>한국어</li>
+            <li class="lang-item" id="langItemEn" role="option" data-lang="en"><span class="code">US</span>English</li>
+            <li class="lang-item" id="langItemZh" role="option" data-lang="zh"><span class="code">CN</span>中文</li>
+            <li class="lang-item" id="langItemTh" role="option" data-lang="th"><span class="code">TH</span>ไทย</li>
+            <li class="lang-item" id="langItemVi" role="option" data-lang="vi"><span class="code">VN</span>Tiếng Việt</li>
+            <li class="lang-item" id="langItemJa" role="option" data-lang="ja"><span class="code">JP</span>日本語</li>
+          </ul>
+        </div>
         <a href="#start" class="nav-cta" id="btnStart" target="_blank" rel="noopener">시작하기</a>
       </div>
     </div>
@@ -350,7 +377,19 @@
     };
 
     /* ===========================================================
-       다국어 문구 (ko / en)
+       언어 메타 (버튼 표시 코드 + 드롭다운 표기명)
+       =========================================================== */
+    var LANG_META = {
+      ko: { code: "KR", name: "한국어" },
+      en: { code: "US", name: "English" },
+      zh: { code: "CN", name: "中文" },
+      th: { code: "TH", name: "ไทย" },
+      vi: { code: "VN", name: "Tiếng Việt" },
+      ja: { code: "JP", name: "日本語" }
+    };
+
+    /* ===========================================================
+       다국어 문구 (ko / en / zh / th / vi / ja)
        =========================================================== */
     var I18N = {
       ko: {
@@ -466,6 +505,234 @@
         footerDisclaimer: "※ NomuMatch is a matching platform connecting users with certified labor attorneys; legal and labor advice is provided by the matched attorney.",
         footerEmail: "Contact Us",
         btnFooterStart: "Start the Service"
+      },
+      zh: {
+        docTitle: "NomuMatch — 劳务士匹配服务",
+        btnStart: "立即开始",
+        heroTitle: '复杂的劳动问题，<br/>与<span class="accent">经过认证的劳务士</span><br/>精准匹配。',
+        badgeCertified: "✅ 认证劳务士",
+        badgeSpeed: "⚡ 平均3分钟内匹配",
+        badgePrivacy: "🔒 咨询内容严格保密",
+        deviceMobile: "您正在使用<b>{device}</b>访问。推荐使用App。",
+        devicePC: "您正在使用<b>PC</b>访问。在网页上即可开始。",
+        deviceApple: "Apple设备",
+        deviceAndroid: "Android设备",
+        btnAppLabel: "通过App开始",
+        appSub: "在{store}下载",
+        btnWebLabel: "通过网页开始",
+        webSub: "在浏览器中直接使用",
+        altWeb: "💻 通过网页开始",
+        altApp: "📱 查看移动App信息",
+        whatTitle: "这些烦恼，NomuMatch来帮您",
+        whatSubtitle: "不要独自烦恼。各领域专业劳务士与您同行。",
+        cardUnfairDismissalTitle: "不当解雇 · 惩戒",
+        cardUnfairDismissalDesc: "从解雇预告、不当解雇救济申请到惩戒应对，与您一起准备劳动委员会程序。",
+        cardUnpaidWageTitle: "拖欠工资 · 退职金",
+        cardUnpaidWageDesc: "未收到的工资、津贴、退职金，从申诉、控告到欠款计算，细致周到。",
+        cardInjuryTitle: "工伤赔偿",
+        cardInjuryDesc: "工伤认定、疗养及停工津贴申请、不予认定的异议申请，均由专家代理。",
+        cardHarassmentTitle: "职场欺凌 · 性骚扰",
+        cardHarassmentDesc: "整理案件、撰写申报书、企业应对咨询，助您安全解决。",
+        cardInsuranceTitle: "四大保险 · 人事劳务",
+        cardInsuranceDesc: "面向雇主的就业规则、劳动合同、社会保险申报等劳务管理全流程。",
+        cardDisputeTitle: "劳资纠纷调解",
+        cardDisputeDesc: "劳资矛盾、集体谈判、和解仲裁，以平衡的视角进行调解。",
+        howTitle: "使用方法 — 只需4步",
+        howSubtitle: "从注册到匹配，无需繁琐流程，快速完成。",
+        step1Title: "填写案件",
+        step1Desc: "请填写问题类型、地区及简单情况。",
+        step2Title: "推荐劳务士",
+        step2Desc: "基于专业领域和评价推荐合适的劳务士。",
+        step3Title: "比较 · 选择",
+        step3Desc: "比较经历、费用、评价后自行选择。",
+        step4Title: "开始咨询",
+        step4Desc: "通过聊天或电话立即咨询并委托案件。",
+        statMatchesNum: "1,200+",
+        statMatchesLabel: "累计匹配数",
+        statSpeedNum: "3分钟",
+        statSpeedLabel: "平均匹配时间",
+        statRatingNum: "4.8 / 5",
+        statRatingLabel: "用户满意度",
+        finalTitle: "立即与劳务士建立联系",
+        finalSubMobile: "安装App后，可更方便地管理通知和咨询记录。",
+        finalSubPC: "在智能手机上使用专用App更快捷。",
+        btnApp2: "📱 通过App开始",
+        btnWeb2: "💻 通过网页开始",
+        footerTagline: "客服中心 · 劳务士匹配平台",
+        footerDisclaimer: "※ NomuMatch是连接用户与认证劳务士的中介平台，法律及劳务咨询由匹配的劳务士提供。",
+        footerEmail: "联系我们",
+        btnFooterStart: "开始使用服务"
+      },
+      th: {
+        docTitle: "NomuMatch — บริการจับคู่ที่ปรึกษากฎหมายแรงงาน",
+        btnStart: "เริ่มต้นใช้งาน",
+        heroTitle: 'ปัญหาแรงงานที่ซับซ้อน<br/>จับคู่อย่างลงตัวกับ<br/><span class="accent">ที่ปรึกษาแรงงานที่ผ่านการรับรอง</span>',
+        badgeCertified: "✅ ที่ปรึกษาแรงงานที่ได้รับการรับรอง",
+        badgeSpeed: "⚡ จับคู่เฉลี่ยภายใน 3 นาที",
+        badgePrivacy: "🔒 ข้อมูลการปรึกษาเป็นความลับ",
+        deviceMobile: "คุณกำลังใช้<b>{device}</b> แนะนำให้ใช้แอป",
+        devicePC: "คุณกำลังใช้<b>PC</b> เริ่มได้ทันทีบนเว็บ",
+        deviceApple: "อุปกรณ์ Apple",
+        deviceAndroid: "อุปกรณ์ Android",
+        btnAppLabel: "เริ่มต้นด้วยแอป",
+        appSub: "ดาวน์โหลดได้ที่ {store}",
+        btnWebLabel: "เริ่มต้นบนเว็บ",
+        webSub: "ใช้งานได้ทันทีบนเบราว์เซอร์",
+        altWeb: "💻 เริ่มต้นบนเว็บ",
+        altApp: "📱 ดูข้อมูลแอปมือถือ",
+        whatTitle: "ปัญหาเหล่านี้ NomuMatch ช่วยคุณได้",
+        whatSubtitle: "อย่าเผชิญปัญหาเพียงลำพัง ที่ปรึกษาแรงงานเฉพาะทางพร้อมช่วยเหลือ",
+        cardUnfairDismissalTitle: "เลิกจ้างไม่เป็นธรรม · วินัย",
+        cardUnfairDismissalDesc: "เตรียมกระบวนการต่อคณะกรรมการแรงงานร่วมกัน ตั้งแต่การแจ้งเลิกจ้าง คำร้องเลิกจ้างไม่เป็นธรรม จนถึงการรับมือทางวินัย",
+        cardUnpaidWageTitle: "ค่าจ้างค้างจ่าย · เงินชดเชย",
+        cardUnpaidWageDesc: "ค่าจ้าง เบี้ยเลี้ยง เงินชดเชยที่ยังไม่ได้รับ ตั้งแต่การร้องเรียน ฟ้องร้อง จนถึงการคำนวณยอดค้างจ่าย",
+        cardInjuryTitle: "เงินทดแทนอุบัติเหตุจากการทำงาน",
+        cardInjuryDesc: "ผู้เชี่ยวชาญดำเนินการรับรองอุบัติเหตุจากงาน การขอเงินทดแทนการรักษาและหยุดงาน รวมถึงการอุทธรณ์",
+        cardHarassmentTitle: "การกลั่นแกล้งในที่ทำงาน",
+        cardHarassmentDesc: "ช่วยจัดระเบียบคดี เขียนคำร้อง และให้คำปรึกษาการรับมือกับบริษัทเพื่อการแก้ไขที่ปลอดภัย",
+        cardInsuranceTitle: "ประกันสังคม · ทรัพยากรบุคคล",
+        cardInsuranceDesc: "สำหรับนายจ้าง: ระเบียบการทำงาน สัญญาจ้าง การยื่นประกันสังคม และการบริหารแรงงานโดยรวม",
+        cardDisputeTitle: "การไกล่เกลี่ยข้อพิพาทแรงงาน",
+        cardDisputeDesc: "ความขัดแย้งนายจ้าง-ลูกจ้าง การเจรจาต่อรองร่วม และการไกล่เกลี่ยข้อตกลงด้วยมุมมองที่สมดุล",
+        howTitle: "วิธีใช้งาน — เพียง 4 ขั้นตอน",
+        howSubtitle: "ตั้งแต่สมัครจนถึงจับคู่ รวดเร็วไม่ยุ่งยาก",
+        step1Title: "กรอกข้อมูลคดี",
+        step1Desc: "บอกประเภทปัญหา พื้นที่ และสถานการณ์คร่าว ๆ",
+        step2Title: "แนะนำที่ปรึกษา",
+        step2Desc: "แนะนำที่ปรึกษาที่เหมาะสมตามความเชี่ยวชาญและรีวิว",
+        step3Title: "เปรียบเทียบ · เลือก",
+        step3Desc: "เปรียบเทียบประสบการณ์ ค่าใช้จ่าย รีวิว แล้วเลือกด้วยตนเอง",
+        step4Title: "เริ่มปรึกษา",
+        step4Desc: "ปรึกษาผ่านแชทหรือโทรศัพท์ และมอบหมายคดีได้ทันที",
+        statMatchesNum: "1,200+",
+        statMatchesLabel: "ยอดจับคู่สะสม",
+        statSpeedNum: "3 นาที",
+        statSpeedLabel: "เวลาจับคู่เฉลี่ย",
+        statRatingNum: "4.8 / 5",
+        statRatingLabel: "ความพึงพอใจของผู้ใช้",
+        finalTitle: "เชื่อมต่อกับที่ปรึกษาแรงงานตอนนี้",
+        finalSubMobile: "ติดตั้งแอปเพื่อจัดการการแจ้งเตือนและประวัติการปรึกษาได้สะดวกยิ่งขึ้น",
+        finalSubPC: "บนสมาร์ทโฟน ใช้แอปเฉพาะได้รวดเร็วกว่า",
+        btnApp2: "📱 เริ่มต้นด้วยแอป",
+        btnWeb2: "💻 เริ่มต้นบนเว็บ",
+        footerTagline: "ศูนย์บริการลูกค้า · แพลตฟอร์มจับคู่ที่ปรึกษาแรงงาน",
+        footerDisclaimer: "※ NomuMatch เป็นแพลตฟอร์มตัวกลางเชื่อมต่อผู้ใช้กับที่ปรึกษาแรงงานที่ได้รับการรับรอง คำปรึกษาด้านกฎหมายและแรงงานให้บริการโดยที่ปรึกษาที่จับคู่",
+        footerEmail: "ติดต่อเรา",
+        btnFooterStart: "เริ่มใช้บริการ"
+      },
+      vi: {
+        docTitle: "NomuMatch — Dịch vụ kết nối chuyên gia luật lao động",
+        btnStart: "Bắt đầu",
+        heroTitle: 'Vấn đề lao động phức tạp,<br/>kết nối chính xác với<br/><span class="accent">chuyên gia lao động đã xác minh</span>.',
+        badgeCertified: "✅ Chuyên gia lao động được chứng nhận",
+        badgeSpeed: "⚡ Kết nối trong ~3 phút",
+        badgePrivacy: "🔒 Bảo mật nội dung tư vấn",
+        deviceMobile: "Bạn đang truy cập bằng <b>{device}</b>. Khuyên dùng ứng dụng.",
+        devicePC: "Bạn đang truy cập bằng <b>PC</b>. Bắt đầu ngay trên web.",
+        deviceApple: "thiết bị Apple",
+        deviceAndroid: "thiết bị Android",
+        btnAppLabel: "Bắt đầu với ứng dụng",
+        appSub: "Tải về trên {store}",
+        btnWebLabel: "Bắt đầu trên web",
+        webSub: "Dùng ngay trên trình duyệt",
+        altWeb: "💻 Bắt đầu trên web",
+        altApp: "📱 Xem thông tin ứng dụng di động",
+        whatTitle: "NomuMatch giúp bạn giải quyết những lo lắng này",
+        whatSubtitle: "Đừng tự mình chịu đựng. Chuyên gia lao động theo từng lĩnh vực luôn đồng hành.",
+        cardUnfairDismissalTitle: "Sa thải bất công · Kỷ luật",
+        cardUnfairDismissalDesc: "Cùng chuẩn bị thủ tục với Ủy ban Lao động, từ thông báo sa thải, khiếu nại sa thải bất công đến ứng phó kỷ luật.",
+        cardUnpaidWageTitle: "Nợ lương · Trợ cấp thôi việc",
+        cardUnpaidWageDesc: "Lương, phụ cấp, trợ cấp thôi việc chưa nhận — từ khiếu nại, tố cáo đến tính toán số tiền bị nợ.",
+        cardInjuryTitle: "Bồi thường tai nạn lao động",
+        cardInjuryDesc: "Chuyên gia đại diện công nhận tai nạn lao động, xin trợ cấp điều trị, nghỉ việc và khiếu nại khi bị từ chối.",
+        cardHarassmentTitle: "Quấy rối nơi làm việc",
+        cardHarassmentDesc: "Sắp xếp vụ việc, soạn đơn tố cáo, tư vấn ứng phó với công ty để giải quyết an toàn.",
+        cardInsuranceTitle: "Bảo hiểm xã hội · Nhân sự lao động",
+        cardInsuranceDesc: "Dành cho chủ doanh nghiệp: nội quy lao động, hợp đồng lao động, khai báo bảo hiểm và quản lý lao động tổng thể.",
+        cardDisputeTitle: "Hòa giải tranh chấp lao động",
+        cardDisputeDesc: "Mâu thuẫn lao động, thương lượng tập thể, hòa giải thỏa thuận với góc nhìn cân bằng.",
+        howTitle: "Cách sử dụng — chỉ 4 bước",
+        howSubtitle: "Từ đăng ký đến kết nối, nhanh chóng không rườm rà.",
+        step1Title: "Nhập vụ việc",
+        step1Desc: "Cho biết loại vấn đề, khu vực và tình huống ngắn gọn.",
+        step2Title: "Đề xuất chuyên gia",
+        step2Desc: "Đề xuất chuyên gia phù hợp dựa trên chuyên môn và đánh giá.",
+        step3Title: "So sánh · Lựa chọn",
+        step3Desc: "So sánh kinh nghiệm, chi phí, đánh giá rồi tự lựa chọn.",
+        step4Title: "Bắt đầu tư vấn",
+        step4Desc: "Tư vấn ngay qua chat hoặc điện thoại và giao phó vụ việc.",
+        statMatchesNum: "1,200+",
+        statMatchesLabel: "Tổng số kết nối",
+        statSpeedNum: "3 phút",
+        statSpeedLabel: "Thời gian kết nối trung bình",
+        statRatingNum: "4.8 / 5",
+        statRatingLabel: "Mức độ hài lòng",
+        finalTitle: "Kết nối với chuyên gia lao động ngay",
+        finalSubMobile: "Cài ứng dụng để quản lý thông báo và lịch sử tư vấn thuận tiện hơn.",
+        finalSubPC: "Trên điện thoại, ứng dụng chuyên dụng còn nhanh hơn.",
+        btnApp2: "📱 Bắt đầu với ứng dụng",
+        btnWeb2: "💻 Bắt đầu trên web",
+        footerTagline: "Trung tâm khách hàng · Nền tảng kết nối chuyên gia lao động",
+        footerDisclaimer: "※ NomuMatch là nền tảng trung gian kết nối người dùng với chuyên gia lao động được chứng nhận; tư vấn pháp lý và lao động do chuyên gia được kết nối thực hiện.",
+        footerEmail: "Liên hệ",
+        btnFooterStart: "Bắt đầu dịch vụ"
+      },
+      ja: {
+        docTitle: "ノムマッチ(NomuMatch) — 労務士マッチングサービス",
+        btnStart: "はじめる",
+        heroTitle: '複雑な労働問題を、<br/><span class="accent">検証済みの労務士</span>と<br/>ぴったりマッチング。',
+        badgeCertified: "✅ 公認労務士認証",
+        badgeSpeed: "⚡ 平均3分でマッチング",
+        badgePrivacy: "🔒 相談内容の秘密保持",
+        deviceMobile: "現在<b>{device}</b>でアクセス中です。アプリのご利用をおすすめします。",
+        devicePC: "現在<b>PC</b>でアクセス中です。ウェブですぐ始めましょう。",
+        deviceApple: "Appleデバイス",
+        deviceAndroid: "Androidデバイス",
+        btnAppLabel: "アプリで始める",
+        appSub: "{store}でダウンロード",
+        btnWebLabel: "ウェブで始める",
+        webSub: "ブラウザですぐ利用",
+        altWeb: "💻 ウェブで始める",
+        altApp: "📱 モバイルアプリのご案内",
+        whatTitle: "こんなお悩み、ノムマッチがサポートします",
+        whatSubtitle: "一人で悩まないでください。分野別の専門労務士が一緒です。",
+        cardUnfairDismissalTitle: "不当解雇 · 懲戒",
+        cardUnfairDismissalDesc: "解雇予告、不当解雇の救済申請、懲戒対応まで労働委員会の手続きを一緒に準備します。",
+        cardUnpaidWageTitle: "賃金未払い · 退職金",
+        cardUnpaidWageDesc: "未払いの賃金・手当・退職金、申告・告訴から未払額の算定まで丁寧に。",
+        cardInjuryTitle: "労働災害補償",
+        cardInjuryDesc: "労災認定、療養・休業給付の申請、不承認への異議申立てを専門家が代理します。",
+        cardHarassmentTitle: "職場のハラスメント",
+        cardHarassmentDesc: "事件整理、申告書作成、会社対応の助言で安全な解決を支援します。",
+        cardInsuranceTitle: "社会保険 · 人事労務",
+        cardInsuranceDesc: "事業主向けの就業規則、雇用契約書、社会保険の届出など労務管理全般。",
+        cardDisputeTitle: "労使紛争の調整",
+        cardDisputeDesc: "労使間の対立、団体交渉、合意の仲裁までバランスの取れた視点で調整します。",
+        howTitle: "ご利用方法 — 4ステップで完了",
+        howSubtitle: "登録からマッチングまで、複雑な手続きなしでスピーディーに。",
+        step1Title: "案件入力",
+        step1Desc: "お悩みの種類と地域、簡単な状況をご記入ください。",
+        step2Title: "労務士のご提案",
+        step2Desc: "専門分野・レビューに基づき最適な労務士をご提案。",
+        step3Title: "比較 · 選択",
+        step3Desc: "経歴、費用、レビューを比較してご自身で選択。",
+        step4Title: "相談開始",
+        step4Desc: "チャット・電話ですぐ相談し、案件を依頼。",
+        statMatchesNum: "1,200+",
+        statMatchesLabel: "累計マッチング件数",
+        statSpeedNum: "3分",
+        statSpeedLabel: "平均マッチング時間",
+        statRatingNum: "4.8 / 5",
+        statRatingLabel: "利用者満足度",
+        finalTitle: "今すぐ労務士とつながりましょう",
+        finalSubMobile: "アプリをインストールすると、通知や相談履歴をより便利に管理できます。",
+        finalSubPC: "スマートフォンでは専用アプリでさらに快適にご利用いただけます。",
+        btnApp2: "📱 アプリで始める",
+        btnWeb2: "💻 ウェブで始める",
+        footerTagline: "カスタマーセンター · 労務士マッチングプラットフォーム",
+        footerDisclaimer: "※ ノムマッチは利用者と公認労務士をつなぐ仲介プラットフォームであり、法律・労務の助言はマッチングされた労務士が行います。",
+        footerEmail: "お問い合わせ",
+        btnFooterStart: "サービスを始める"
       }
     };
 
@@ -502,10 +769,18 @@
       ];
 
       function applyLang(lang) {
-        var t = I18N[lang] || I18N.ko;
+        if (!I18N[lang]) lang = 'ko';
+        var t = I18N[lang];
         document.documentElement.lang = lang;
         document.title = t.docTitle;
-        localStorage.setItem('nm_lang', lang);
+        try { localStorage.setItem('nm_lang', lang); } catch (e) {}
+
+        // 언어 버튼 표시 + 활성 항목 표시
+        $('langCode').textContent = LANG_META[lang].code;
+        var items = document.querySelectorAll('.lang-item');
+        for (var j = 0; j < items.length; j++) {
+          items[j].classList.toggle('active', items[j].getAttribute('data-lang') === lang);
+        }
 
         for (var i = 0; i < TEXT_IDS.length; i++) {
           var el = $(TEXT_IDS[i]);
@@ -552,15 +827,47 @@
         }
       }
 
+      // ---- 언어 드롭다운 (지구본 버튼) ----
+      var langBtn = $('langBtn');
+      var langDropdown = $('langDropdown');
+
+      function closeDropdown() {
+        langDropdown.classList.add('is-hidden');
+        langBtn.setAttribute('aria-expanded', 'false');
+      }
+
+      langBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var willOpen = langDropdown.classList.contains('is-hidden');
+        langDropdown.classList.toggle('is-hidden');
+        langBtn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      });
+
+      langDropdown.addEventListener('click', function (e) {
+        var item = e.target.closest('.lang-item');
+        if (!item) return;
+        applyLang(item.getAttribute('data-lang'));
+        closeDropdown();
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!$('langMenu').contains(e.target)) closeDropdown();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeDropdown();
+      });
+
       // 초기 언어: 저장값 > 브라우저 언어
       var saved = null;
       try { saved = localStorage.getItem('nm_lang'); } catch (e) {}
-      var initial = (saved === 'ko' || saved === 'en') ? saved :
-                    ((navigator.language || 'ko').toLowerCase().indexOf('ko') === 0 ? 'ko' : 'en');
-
-      var langSelect = $('langSelect');
-      langSelect.value = initial;
-      langSelect.addEventListener('change', function () { applyLang(this.value); });
+      var initial;
+      if (saved && I18N[saved]) {
+        initial = saved;
+      } else {
+        var nav = (navigator.language || 'ko').toLowerCase().slice(0, 2);
+        initial = I18N[nav] ? nav : 'en';
+        if (nav === 'ko') initial = 'ko';
+      }
 
       applyLang(initial);
     })();
