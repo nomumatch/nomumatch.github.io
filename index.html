@@ -12,6 +12,9 @@
   <meta property="og:image" content="assets/hero.jpg" />
   <meta property="og:type" content="website" />
 
+  <!-- Hero image preload (LCP) -->
+  <link rel="preload" as="image" href="assets/hero.jpg" fetchpriority="high" />
+
   <style>
     :root {
       --navy: #1b2a4a;
@@ -195,7 +198,7 @@
   <header id="siteHeader">
     <div class="container nav" id="navBar">
       <div class="brand" id="brand">
-        <img src="assets/logo.jpg" alt="노무매치 로고" id="logoImg" />
+        <img src="assets/logo.jpg" alt="노무매치 로고" id="logoImg" width="96" height="97" />
         <span id="brandName">노무매치<span style="color:var(--muted);font-weight:600;font-size:.8rem;"> NomuMatch</span></span>
       </div>
       <div class="nav-right" id="navRight">
@@ -249,7 +252,7 @@
       </div>
 
       <div id="heroImgWrap">
-        <img class="hero-img" src="assets/hero.jpg" alt="공인노무사 전문가" id="heroImg" />
+        <img class="hero-img" src="assets/hero.jpg" alt="공인노무사 전문가" id="heroImg" width="800" height="800" fetchpriority="high" decoding="async" />
       </div>
     </div>
   </section>
