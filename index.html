@@ -50,10 +50,18 @@
     }
     .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.15rem; color: var(--navy); }
     .brand img { width: 38px; height: 38px; border-radius: 9px; }
+    .nav-right { display: flex; align-items: center; gap: 10px; }
     .nav-cta {
       background: var(--blue); color: #fff; border: none;
       padding: 9px 18px; border-radius: 999px; font-weight: 700; font-size: .92rem;
       cursor: pointer; text-decoration: none;
+    }
+    .lang-select {
+      appearance: none; -webkit-appearance: none;
+      background: #fff url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%235b6678' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 10px center;
+      border: 1px solid #d7deeb; border-radius: 999px;
+      padding: 7px 28px 7px 14px; font-size: .88rem; font-weight: 600;
+      color: var(--navy); cursor: pointer;
     }
 
     /* ---------- Hero ---------- */
@@ -172,7 +180,13 @@
         <img src="assets/logo.jpg" alt="노무매치 로고" id="logoImg" />
         <span id="brandName">노무매치<span style="color:var(--muted);font-weight:600;font-size:.8rem;"> NomuMatch</span></span>
       </div>
-      <a href="#start" class="nav-cta" id="btnStart" target="_blank" rel="noopener">시작하기</a>
+      <div class="nav-right" id="navRight">
+        <select class="lang-select" id="langSelect" aria-label="Language">
+          <option value="ko">한국어</option>
+          <option value="en">English</option>
+        </select>
+        <a href="#start" class="nav-cta" id="btnStart" target="_blank" rel="noopener">시작하기</a>
+      </div>
     </div>
   </header>
 
@@ -193,11 +207,11 @@
           <div class="cta-buttons" id="heroCtaButtons">
             <!-- Mobile / app -->
             <a class="btn btn-primary is-hidden" id="btnApp" href="#" target="_blank" rel="noopener">
-              📱 <span class="btn-row">앱으로 시작하기<span class="sub" id="appSub">App Store / Google Play</span></span>
+              📱 <span class="btn-row"><span id="btnAppLabel">앱으로 시작하기</span><span class="sub" id="appSub">App Store / Google Play</span></span>
             </a>
             <!-- PC / web -->
             <a class="btn btn-primary is-hidden" id="btnWeb" href="#" target="_blank" rel="noopener">
-              💻 <span class="btn-row">웹으로 시작하기<span class="sub">PC 브라우저에서 바로 이용</span></span>
+              💻 <span class="btn-row"><span id="btnWebLabel">웹으로 시작하기</span><span class="sub" id="webSub">PC 브라우저에서 바로 이용</span></span>
             </a>
             <!-- Always-available alternate -->
             <a class="btn btn-secondary" id="btnAlt" href="#" target="_blank" rel="noopener">
@@ -223,33 +237,33 @@
       <div class="cards" id="whatCards">
         <div class="card" id="cardUnfairDismissal">
           <div class="ico">⚖️</div>
-          <h3>부당해고 · 징계</h3>
-          <p>해고예고, 부당해고 구제신청, 징계 대응까지 노동위원회 절차를 함께 준비합니다.</p>
+          <h3 id="cardUnfairDismissalTitle">부당해고 · 징계</h3>
+          <p id="cardUnfairDismissalDesc">해고예고, 부당해고 구제신청, 징계 대응까지 노동위원회 절차를 함께 준비합니다.</p>
         </div>
         <div class="card" id="cardUnpaidWage">
           <div class="ico">💰</div>
-          <h3>임금체불 · 퇴직금</h3>
-          <p>못 받은 임금·수당·퇴직금, 진정·고소부터 체불액 산정까지 꼼꼼하게.</p>
+          <h3 id="cardUnpaidWageTitle">임금체불 · 퇴직금</h3>
+          <p id="cardUnpaidWageDesc">못 받은 임금·수당·퇴직금, 진정·고소부터 체불액 산정까지 꼼꼼하게.</p>
         </div>
         <div class="card" id="cardInjury">
           <div class="ico">🏥</div>
-          <h3>산업재해 보상</h3>
-          <p>산재 인정, 요양·휴업급여 신청과 불승인 이의신청을 전문가가 대리합니다.</p>
+          <h3 id="cardInjuryTitle">산업재해 보상</h3>
+          <p id="cardInjuryDesc">산재 인정, 요양·휴업급여 신청과 불승인 이의신청을 전문가가 대리합니다.</p>
         </div>
         <div class="card" id="cardHarassment">
           <div class="ico">🛡️</div>
-          <h3>직장 내 괴롭힘 · 성희롱</h3>
-          <p>사건 정리, 신고서 작성, 회사 대응 자문으로 안전한 해결을 돕습니다.</p>
+          <h3 id="cardHarassmentTitle">직장 내 괴롭힘 · 성희롱</h3>
+          <p id="cardHarassmentDesc">사건 정리, 신고서 작성, 회사 대응 자문으로 안전한 해결을 돕습니다.</p>
         </div>
         <div class="card" id="cardInsurance">
           <div class="ico">📋</div>
-          <h3>4대보험 · 인사노무</h3>
-          <p>사업주를 위한 취업규칙, 근로계약서, 4대보험 신고 등 노무관리 전반.</p>
+          <h3 id="cardInsuranceTitle">4대보험 · 인사노무</h3>
+          <p id="cardInsuranceDesc">사업주를 위한 취업규칙, 근로계약서, 4대보험 신고 등 노무관리 전반.</p>
         </div>
         <div class="card" id="cardDispute">
           <div class="ico">🤝</div>
-          <h3>노사 분쟁 조정</h3>
-          <p>노사 간 갈등, 단체교섭, 합의 중재까지 균형 잡힌 시각으로 중재합니다.</p>
+          <h3 id="cardDisputeTitle">노사 분쟁 조정</h3>
+          <p id="cardDisputeDesc">노사 간 갈등, 단체교섭, 합의 중재까지 균형 잡힌 시각으로 중재합니다.</p>
         </div>
       </div>
     </div>
@@ -265,23 +279,23 @@
       <div class="steps" id="howSteps">
         <div class="step" id="step1">
           <div class="num">1</div>
-          <h4>사건 입력</h4>
-          <p>고민 유형과 지역, 간단한 상황을 적어주세요.</p>
+          <h4 id="step1Title">사건 입력</h4>
+          <p id="step1Desc">고민 유형과 지역, 간단한 상황을 적어주세요.</p>
         </div>
         <div class="step" id="step2">
           <div class="num">2</div>
-          <h4>노무사 추천</h4>
-          <p>전문 분야·후기 기반으로 적합한 노무사를 추천.</p>
+          <h4 id="step2Title">노무사 추천</h4>
+          <p id="step2Desc">전문 분야·후기 기반으로 적합한 노무사를 추천.</p>
         </div>
         <div class="step" id="step3">
           <div class="num">3</div>
-          <h4>비교 · 선택</h4>
-          <p>경력, 비용, 후기를 비교하고 직접 선택하세요.</p>
+          <h4 id="step3Title">비교 · 선택</h4>
+          <p id="step3Desc">경력, 비용, 후기를 비교하고 직접 선택하세요.</p>
         </div>
         <div class="step" id="step4">
           <div class="num">4</div>
-          <h4>상담 시작</h4>
-          <p>채팅·전화로 바로 상담하고 사건을 맡기세요.</p>
+          <h4 id="step4Title">상담 시작</h4>
+          <p id="step4Desc">채팅·전화로 바로 상담하고 사건을 맡기세요.</p>
         </div>
       </div>
     </div>
@@ -290,9 +304,9 @@
   <!-- ===== Stats ===== -->
   <section class="block" id="statsSection">
     <div class="container stats" id="statsRow">
-      <div class="stat" id="statMatches"><div class="n">1,200+</div><div class="l">누적 매칭 건수</div></div>
-      <div class="stat" id="statSpeed"><div class="n">3분</div><div class="l">평균 매칭 소요 시간</div></div>
-      <div class="stat" id="statRating"><div class="n">4.8 / 5</div><div class="l">이용자 만족도</div></div>
+      <div class="stat" id="statMatches"><div class="n" id="statMatchesNum">1,200+</div><div class="l" id="statMatchesLabel">누적 매칭 건수</div></div>
+      <div class="stat" id="statSpeed"><div class="n" id="statSpeedNum">3분</div><div class="l" id="statSpeedLabel">평균 매칭 소요 시간</div></div>
+      <div class="stat" id="statRating"><div class="n" id="statRatingNum">4.8 / 5</div><div class="l" id="statRatingLabel">이용자 만족도</div></div>
     </div>
   </section>
 
@@ -319,7 +333,7 @@
         </div>
       </div>
       <div id="footerLinks">
-        <div><a href="mailto:nomumatch@gmail.com" id="footerEmail">nomumatch@gmail.com</a></div>
+        <div><a href="mailto:nomumatch@gmail.com" id="footerEmail">문의하기</a></div>
         <div style="margin-top:6px;"><a href="#start" id="btnFooterStart" target="_blank" rel="noopener">서비스 시작하기</a></div>
       </div>
     </div>
@@ -335,6 +349,126 @@
       web:     "http://dev.nomumatch.com:8888/main"              // 웹 앱
     };
 
+    /* ===========================================================
+       다국어 문구 (ko / en)
+       =========================================================== */
+    var I18N = {
+      ko: {
+        docTitle: "노무매치(NomuMatch) — 노무사 매칭 서비스",
+        btnStart: "시작하기",
+        heroTitle: '복잡한 노동 문제,<br/><span class="accent">검증된 노무사</span>와<br/>딱 맞게 매칭.',
+        badgeCertified: "✅ 공인노무사 인증",
+        badgeSpeed: "⚡ 평균 3분 내 매칭",
+        badgePrivacy: "🔒 상담 내용 비밀 보장",
+        deviceMobile: "현재 <b>{device}</b>로 접속하셨어요. 앱 이용을 추천합니다.",
+        devicePC: "현재 <b>PC</b>로 접속하셨어요. 웹에서 바로 시작하세요.",
+        deviceApple: "Apple 기기",
+        deviceAndroid: "Android 기기",
+        btnAppLabel: "앱으로 시작하기",
+        appSub: "{store}에서 내려받기",
+        btnWebLabel: "웹으로 시작하기",
+        webSub: "PC 브라우저에서 바로 이용",
+        altWeb: "💻 웹으로 시작하기",
+        altApp: "📱 모바일 앱 안내 보기",
+        whatTitle: "이런 고민, 노무매치가 도와드려요",
+        whatSubtitle: "혼자 끙끙 앓지 마세요. 분야별 전문 노무사가 함께합니다.",
+        cardUnfairDismissalTitle: "부당해고 · 징계",
+        cardUnfairDismissalDesc: "해고예고, 부당해고 구제신청, 징계 대응까지 노동위원회 절차를 함께 준비합니다.",
+        cardUnpaidWageTitle: "임금체불 · 퇴직금",
+        cardUnpaidWageDesc: "못 받은 임금·수당·퇴직금, 진정·고소부터 체불액 산정까지 꼼꼼하게.",
+        cardInjuryTitle: "산업재해 보상",
+        cardInjuryDesc: "산재 인정, 요양·휴업급여 신청과 불승인 이의신청을 전문가가 대리합니다.",
+        cardHarassmentTitle: "직장 내 괴롭힘 · 성희롱",
+        cardHarassmentDesc: "사건 정리, 신고서 작성, 회사 대응 자문으로 안전한 해결을 돕습니다.",
+        cardInsuranceTitle: "4대보험 · 인사노무",
+        cardInsuranceDesc: "사업주를 위한 취업규칙, 근로계약서, 4대보험 신고 등 노무관리 전반.",
+        cardDisputeTitle: "노사 분쟁 조정",
+        cardDisputeDesc: "노사 간 갈등, 단체교섭, 합의 중재까지 균형 잡힌 시각으로 중재합니다.",
+        howTitle: "이용 방법 — 4단계면 충분해요",
+        howSubtitle: "가입부터 매칭까지, 복잡한 절차 없이 빠르게.",
+        step1Title: "사건 입력",
+        step1Desc: "고민 유형과 지역, 간단한 상황을 적어주세요.",
+        step2Title: "노무사 추천",
+        step2Desc: "전문 분야·후기 기반으로 적합한 노무사를 추천.",
+        step3Title: "비교 · 선택",
+        step3Desc: "경력, 비용, 후기를 비교하고 직접 선택하세요.",
+        step4Title: "상담 시작",
+        step4Desc: "채팅·전화로 바로 상담하고 사건을 맡기세요.",
+        statMatchesNum: "1,200+",
+        statMatchesLabel: "누적 매칭 건수",
+        statSpeedNum: "3분",
+        statSpeedLabel: "평균 매칭 소요 시간",
+        statRatingNum: "4.8 / 5",
+        statRatingLabel: "이용자 만족도",
+        finalTitle: "지금 바로 노무사와 연결되세요",
+        finalSubMobile: "앱을 설치하면 알림·상담 기록을 더 편하게 관리할 수 있어요.",
+        finalSubPC: "스마트폰에서는 전용 앱으로 더 빠르게 이용할 수 있어요.",
+        btnApp2: "📱 앱으로 시작하기",
+        btnWeb2: "💻 웹으로 시작하기",
+        footerTagline: "고객센터 · 노무사 매칭 플랫폼",
+        footerDisclaimer: "※ 노무매치는 이용자와 공인노무사를 연결하는 중개 플랫폼이며, 법률·노무 자문의 주체는 매칭된 노무사입니다.",
+        footerEmail: "문의하기",
+        btnFooterStart: "서비스 시작하기"
+      },
+      en: {
+        docTitle: "NomuMatch — Labor Attorney Matching Service",
+        btnStart: "Get Started",
+        heroTitle: 'Complex labor issues,<br/>matched perfectly with a<br/><span class="accent">verified labor attorney</span>.',
+        badgeCertified: "✅ Certified labor attorneys",
+        badgeSpeed: "⚡ Matched in ~3 minutes",
+        badgePrivacy: "🔒 Confidential consultations",
+        deviceMobile: "You're on an <b>{device}</b>. We recommend using the app.",
+        devicePC: "You're on a <b>PC</b>. Start right away on the web.",
+        deviceApple: "Apple device",
+        deviceAndroid: "Android device",
+        btnAppLabel: "Start with the App",
+        appSub: "Download on {store}",
+        btnWebLabel: "Start on the Web",
+        webSub: "Use it right in your browser",
+        altWeb: "💻 Start on the Web",
+        altApp: "📱 View Mobile App Info",
+        whatTitle: "NomuMatch helps with concerns like these",
+        whatSubtitle: "Don't struggle alone. Specialized labor attorneys are with you.",
+        cardUnfairDismissalTitle: "Unfair Dismissal · Discipline",
+        cardUnfairDismissalDesc: "From dismissal notice and unfair-dismissal claims to disciplinary responses, we prepare Labor Commission procedures together.",
+        cardUnpaidWageTitle: "Unpaid Wages · Severance",
+        cardUnpaidWageDesc: "Unpaid wages, allowances and severance — from complaints and charges to calculating what you're owed.",
+        cardInjuryTitle: "Industrial Accident Compensation",
+        cardInjuryDesc: "Experts handle accident recognition, medical and leave benefit claims, and appeals against denials.",
+        cardHarassmentTitle: "Workplace Harassment",
+        cardHarassmentDesc: "Case organization, report drafting, and advice on company responses for a safe resolution.",
+        cardInsuranceTitle: "Social Insurance · HR & Labor",
+        cardInsuranceDesc: "For employers: work rules, employment contracts, social insurance filings and overall labor management.",
+        cardDisputeTitle: "Labor Dispute Mediation",
+        cardDisputeDesc: "Labor-management conflicts, collective bargaining, and settlement mediation with a balanced perspective.",
+        howTitle: "How It Works — 4 Simple Steps",
+        howSubtitle: "From sign-up to matching, fast and hassle-free.",
+        step1Title: "Describe Your Case",
+        step1Desc: "Tell us your issue type, region, and a brief situation.",
+        step2Title: "Get Recommendations",
+        step2Desc: "We recommend attorneys based on specialty and reviews.",
+        step3Title: "Compare & Choose",
+        step3Desc: "Compare experience, fees and reviews, then choose.",
+        step4Title: "Start Consulting",
+        step4Desc: "Consult by chat or phone and entrust your case.",
+        statMatchesNum: "1,200+",
+        statMatchesLabel: "Total matches",
+        statSpeedNum: "3 min",
+        statSpeedLabel: "Average matching time",
+        statRatingNum: "4.8 / 5",
+        statRatingLabel: "User satisfaction",
+        finalTitle: "Connect with a labor attorney now",
+        finalSubMobile: "Install the app to manage notifications and consultation history more easily.",
+        finalSubPC: "On your smartphone, the dedicated app is even faster.",
+        btnApp2: "📱 Start with the App",
+        btnWeb2: "💻 Start on the Web",
+        footerTagline: "Customer Center · Labor Attorney Matching Platform",
+        footerDisclaimer: "※ NomuMatch is a matching platform connecting users with certified labor attorneys; legal and labor advice is provided by the matched attorney.",
+        footerEmail: "Contact Us",
+        btnFooterStart: "Start the Service"
+      }
+    };
+
     (function () {
       var ua = navigator.userAgent || navigator.vendor || window.opera;
       var isIOS = /iPad|iPhone|iPod/.test(ua) ||
@@ -342,57 +476,93 @@
       var isAndroid = /android/i.test(ua);
       var isMobile = isIOS || isAndroid || /Mobile/i.test(ua);
 
-      var deviceLine = document.getElementById('deviceLine');
-      var btnApp  = document.getElementById('btnApp');
-      var btnWeb  = document.getElementById('btnWeb');
-      var btnAlt  = document.getElementById('btnAlt');
-      var appSub  = document.getElementById('appSub');
-      var altLabel= document.getElementById('altLabel');
-
-      var btnApp2 = document.getElementById('btnApp2');
-      var btnWeb2 = document.getElementById('btnWeb2');
-      var finalSub= document.getElementById('finalSub');
-      var btnStart= document.getElementById('btnStart');
-      var btnFooterStart = document.getElementById('btnFooterStart');
-
+      function $(id){ return document.getElementById(id); }
       function show(el){ el.classList.remove('is-hidden'); }
       function hide(el){ el.classList.add('is-hidden'); }
 
-      if (isMobile) {
-        // 모바일 → 앱 우선
-        var appUrl = isIOS ? LINKS.ios : LINKS.android;
-        var storeName = isIOS ? 'App Store' : 'Google Play';
+      // 텍스트만 넣으면 되는 요소들 (id = I18N key)
+      var TEXT_IDS = [
+        'btnStart', 'badgeCertified', 'badgeSpeed', 'badgePrivacy',
+        'btnAppLabel', 'btnWebLabel', 'webSub',
+        'whatTitle', 'whatSubtitle',
+        'cardUnfairDismissalTitle', 'cardUnfairDismissalDesc',
+        'cardUnpaidWageTitle', 'cardUnpaidWageDesc',
+        'cardInjuryTitle', 'cardInjuryDesc',
+        'cardHarassmentTitle', 'cardHarassmentDesc',
+        'cardInsuranceTitle', 'cardInsuranceDesc',
+        'cardDisputeTitle', 'cardDisputeDesc',
+        'howTitle', 'howSubtitle',
+        'step1Title', 'step1Desc', 'step2Title', 'step2Desc',
+        'step3Title', 'step3Desc', 'step4Title', 'step4Desc',
+        'statMatchesNum', 'statMatchesLabel',
+        'statSpeedNum', 'statSpeedLabel',
+        'statRatingNum', 'statRatingLabel',
+        'finalTitle', 'btnApp2', 'btnWeb2',
+        'footerTagline', 'footerDisclaimer', 'footerEmail', 'btnFooterStart'
+      ];
 
-        deviceLine.innerHTML = '현재 <b>' + (isIOS ? 'Apple 기기' : 'Android 기기') + '</b>로 접속하셨어요. 앱 이용을 추천합니다.';
-        appSub.textContent = storeName + '에서 내려받기';
+      function applyLang(lang) {
+        var t = I18N[lang] || I18N.ko;
+        document.documentElement.lang = lang;
+        document.title = t.docTitle;
+        localStorage.setItem('nm_lang', lang);
 
-        btnApp.href = appUrl;  show(btnApp);
-        btnApp2.href = appUrl;  show(btnApp2);
+        for (var i = 0; i < TEXT_IDS.length; i++) {
+          var el = $(TEXT_IDS[i]);
+          if (el && t[TEXT_IDS[i]] !== undefined) el.textContent = t[TEXT_IDS[i]];
+        }
+        $('heroTitle').innerHTML = t.heroTitle;
 
-        // 헤더 '시작하기' + 푸터 '서비스 시작하기' → 모바일이면 해당 OS 앱 스토어로
-        btnStart.href = appUrl;
-        btnFooterStart.href = appUrl;
+        // ---- 기기별 CTA (언어 반영해 다시 렌더) ----
+        if (isMobile) {
+          var appUrl = isIOS ? LINKS.ios : LINKS.android;
+          var storeName = isIOS ? 'App Store' : 'Google Play';
+          var deviceName = isIOS ? t.deviceApple : t.deviceAndroid;
 
-        altLabel.textContent = '💻 웹으로 시작하기';
-        btnAlt.href = LINKS.web;
+          $('deviceLine').innerHTML = t.deviceMobile.replace('{device}', deviceName);
+          $('appSub').textContent = t.appSub.replace('{store}', storeName);
 
-        finalSub.textContent = '앱을 설치하면 알림·상담 기록을 더 편하게 관리할 수 있어요.';
-      } else {
-        // PC → 웹 우선
-        deviceLine.innerHTML = '현재 <b>PC</b>로 접속하셨어요. 웹에서 바로 시작하세요.';
+          $('btnApp').href = appUrl;  show($('btnApp'));
+          $('btnApp2').href = appUrl; show($('btnApp2'));
+          hide($('btnWeb')); hide($('btnWeb2'));
 
-        btnWeb.href = LINKS.web;  show(btnWeb);
-        btnWeb2.href = LINKS.web;  show(btnWeb2);
+          // 헤더 '시작하기' + 푸터 '서비스 시작하기' → 모바일이면 해당 OS 앱 스토어로
+          $('btnStart').href = appUrl;
+          $('btnFooterStart').href = appUrl;
 
-        // 헤더 '시작하기' + 푸터 '서비스 시작하기' → PC면 웹으로 시작하기와 동일
-        btnStart.href = LINKS.web;
-        btnFooterStart.href = LINKS.web;
+          $('altLabel').textContent = t.altWeb;
+          $('btnAlt').href = LINKS.web;
 
-        altLabel.textContent = '📱 모바일 앱 안내 보기';
-        btnAlt.href = LINKS.android; // 안내용 — 스토어 페이지
+          $('finalSub').textContent = t.finalSubMobile;
+        } else {
+          $('deviceLine').innerHTML = t.devicePC;
 
-        finalSub.textContent = '스마트폰에서는 전용 앱으로 더 빠르게 이용할 수 있어요.';
+          $('btnWeb').href = LINKS.web;  show($('btnWeb'));
+          $('btnWeb2').href = LINKS.web; show($('btnWeb2'));
+          hide($('btnApp')); hide($('btnApp2'));
+
+          // 헤더 '시작하기' + 푸터 '서비스 시작하기' → PC면 웹으로 시작하기와 동일
+          $('btnStart').href = LINKS.web;
+          $('btnFooterStart').href = LINKS.web;
+
+          $('altLabel').textContent = t.altApp;
+          $('btnAlt').href = LINKS.android; // 안내용 — 스토어 페이지
+
+          $('finalSub').textContent = t.finalSubPC;
+        }
       }
+
+      // 초기 언어: 저장값 > 브라우저 언어
+      var saved = null;
+      try { saved = localStorage.getItem('nm_lang'); } catch (e) {}
+      var initial = (saved === 'ko' || saved === 'en') ? saved :
+                    ((navigator.language || 'ko').toLowerCase().indexOf('ko') === 0 ? 'ko' : 'en');
+
+      var langSelect = $('langSelect');
+      langSelect.value = initial;
+      langSelect.addEventListener('change', function () { applyLang(this.value); });
+
+      applyLang(initial);
     })();
   </script>
 </body>
