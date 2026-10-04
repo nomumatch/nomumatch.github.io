@@ -58,6 +58,7 @@
       background: var(--blue); color: #fff; border: none;
       padding: 9px 18px; border-radius: 999px; font-weight: 700; font-size: .92rem;
       cursor: pointer; text-decoration: none;
+      white-space: nowrap; flex-shrink: 0; /* 좁은 폰에서도 '시작하기'가 두 줄로 꺾이지 않게 */
     }
 
     /* ---------- Language menu (globe) ---------- */
@@ -189,6 +190,15 @@
       .steps { grid-template-columns: repeat(2, 1fr); }
       .stats { grid-template-columns: 1fr; gap: 28px; }
       .hero-img { max-width: 360px; margin: 0 auto; display: block; }
+    }
+    /* 좁은 폰(≤420px): 헤더를 줄여 로고 · 언어 · [시작하기]가 한 줄에 들어가게(태국어 등 긴 문구 포함) */
+    @media (max-width: 420px) {
+      .nav { gap: 8px; }
+      .brand { gap: 7px; font-size: 1rem; min-width: 0; }
+      .brand img { width: 32px; height: 32px; }
+      .nav-right { gap: 6px; }
+      .lang-btn { padding: 6px 9px; gap: 4px; font-size: .82rem; }
+      .nav-cta { padding: 8px 12px; font-size: .84rem; }
     }
   </style>
 </head>
