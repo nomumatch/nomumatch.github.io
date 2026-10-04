@@ -237,7 +237,7 @@
           <div class="cta-buttons" id="heroCtaButtons">
             <!-- Mobile / app -->
             <a class="btn btn-primary is-hidden" id="btnApp" href="#" target="_blank" rel="noopener">
-              📱 <span class="btn-row"><span id="btnAppLabel">앱으로 시작하기</span><span class="sub" id="appSub">App Store / Google Play</span></span>
+              📱 <span class="btn-row"><span id="btnAppLabel">앱으로 시작하기</span><span class="sub" id="appSub">Android APK</span></span>
             </a>
             <!-- PC / web -->
             <a class="btn btn-primary is-hidden" id="btnWeb" href="#" target="_blank" rel="noopener">
@@ -374,8 +374,8 @@
        링크 설정 — 실제 스토어/웹 주소로 교체하세요.
        =========================================================== */
     var LINKS = {
-      ios:     "https://apps.apple.com/app/idYOURAPPID",        // App Store
-      android: "https://play.google.com/store/apps/details?id=com.nomumatch", // Google Play
+      ios:     "",                                                // App Store 미출시 — iPhone은 웹으로 안내
+      android: "https://dev.nomumatch.com/download/nomumatch.apk", // 안드로이드 앱 파일(APK) 직접 내려받기
       web:     "http://dev.nomumatch.com:8888/main"              // 웹 앱
     };
 
@@ -407,7 +407,8 @@
         deviceApple: "Apple 기기",
         deviceAndroid: "Android 기기",
         btnAppLabel: "앱으로 시작하기",
-        appSub: "{store}에서 내려받기",
+        appSub: "앱 파일(APK) 바로 내려받기",
+        appSubIos: "브라우저에서 바로 이용",
         btnWebLabel: "웹으로 시작하기",
         webSub: "PC 브라우저에서 바로 이용",
         altWeb: "💻 웹으로 시작하기",
@@ -464,7 +465,8 @@
         deviceApple: "Apple device",
         deviceAndroid: "Android device",
         btnAppLabel: "Start with the App",
-        appSub: "Download on {store}",
+        appSub: "Download the app file (APK)",
+        appSubIos: "Use it right in your browser",
         btnWebLabel: "Start on the Web",
         webSub: "Use it right in your browser",
         altWeb: "💻 Start on the Web",
@@ -521,7 +523,8 @@
         deviceApple: "Apple设备",
         deviceAndroid: "Android设备",
         btnAppLabel: "通过App开始",
-        appSub: "在{store}下载",
+        appSub: "直接下载应用文件(APK)",
+        appSubIos: "在浏览器中直接使用",
         btnWebLabel: "通过网页开始",
         webSub: "在浏览器中直接使用",
         altWeb: "💻 通过网页开始",
@@ -578,7 +581,8 @@
         deviceApple: "อุปกรณ์ Apple",
         deviceAndroid: "อุปกรณ์ Android",
         btnAppLabel: "เริ่มต้นด้วยแอป",
-        appSub: "ดาวน์โหลดได้ที่ {store}",
+        appSub: "ดาวน์โหลดไฟล์แอป (APK) โดยตรง",
+        appSubIos: "ใช้งานผ่านเบราว์เซอร์ได้ทันที",
         btnWebLabel: "เริ่มต้นบนเว็บ",
         webSub: "ใช้งานได้ทันทีบนเบราว์เซอร์",
         altWeb: "💻 เริ่มต้นบนเว็บ",
@@ -635,7 +639,8 @@
         deviceApple: "thiết bị Apple",
         deviceAndroid: "thiết bị Android",
         btnAppLabel: "Bắt đầu với ứng dụng",
-        appSub: "Tải về trên {store}",
+        appSub: "Tải trực tiếp tệp ứng dụng (APK)",
+        appSubIos: "Dùng ngay trên trình duyệt",
         btnWebLabel: "Bắt đầu trên web",
         webSub: "Dùng ngay trên trình duyệt",
         altWeb: "💻 Bắt đầu trên web",
@@ -692,7 +697,8 @@
         deviceApple: "Appleデバイス",
         deviceAndroid: "Androidデバイス",
         btnAppLabel: "アプリで始める",
-        appSub: "{store}でダウンロード",
+        appSub: "アプリファイル(APK)を直接ダウンロード",
+        appSubIos: "ブラウザですぐに利用",
         btnWebLabel: "ウェブで始める",
         webSub: "ブラウザですぐ利用",
         altWeb: "💻 ウェブで始める",
@@ -793,18 +799,18 @@
 
         // ---- 기기별 CTA (언어 반영해 다시 렌더) ----
         if (isMobile) {
-          var appUrl = isIOS ? LINKS.ios : LINKS.android;
-          var storeName = isIOS ? 'App Store' : 'Google Play';
+          // iPhone 앱은 아직 없어 웹으로 연결, 안드로이드는 APK 직접 내려받기
+          var appUrl = isIOS ? (LINKS.ios || LINKS.web) : LINKS.android;
           var deviceName = isIOS ? t.deviceApple : t.deviceAndroid;
 
           $('deviceLine').innerHTML = t.deviceMobile.replace('{device}', deviceName);
-          $('appSub').textContent = t.appSub.replace('{store}', storeName);
+          $('appSub').textContent = isIOS && !LINKS.ios ? t.appSubIos : t.appSub;
 
           $('btnApp').href = appUrl;  show($('btnApp'));
           $('btnApp2').href = appUrl; show($('btnApp2'));
           hide($('btnWeb')); hide($('btnWeb2'));
 
-          // 헤더 '시작하기' + 푸터 '서비스 시작하기' → 모바일이면 해당 OS 앱 스토어로
+          // 헤더 '시작하기' + 푸터 '서비스 시작하기' → 모바일이면 앱(안드로이드 APK · iPhone은 웹)으로
           $('btnStart').href = appUrl;
           $('btnFooterStart').href = appUrl;
 
@@ -824,7 +830,7 @@
           $('btnFooterStart').href = LINKS.web;
 
           $('altLabel').textContent = t.altApp;
-          $('btnAlt').href = LINKS.android; // 안내용 — 스토어 페이지
+          $('btnAlt').href = LINKS.android; // 안내용 — 안드로이드 APK
 
           $('finalSub').textContent = t.finalSubPC;
         }
